@@ -1,0 +1,74 @@
+[^1*]strlenW,name,get_outline_text_metrics,Definitely Error:physdev->font->name can be set to NULL before calling API:GetTextMetricsW, which may cause NULL pointer dereference.
+/home/yangke/Program/Winux/wine-3.0.1/dlls/gdi32/freetype.c:7677:    lenfam = (strlenW(font->name) + 1) * sizeof(WCHAR);
+[(no bug)2]lstrcpynW,pszSelectedColor,UXTHEME_LoadTheme,OK
+/home/yangke/Program/Winux/wine-3.0.1/dlls/uxtheme/system.c:197:            lstrcpynW(szCurrentColor, pt->pszSelectedColor, sizeof(szCurrentColor)/sizeof(szCurrentColor[0]));
+lstrcpynW,pszSelectedSize,UXTHEME_LoadTheme,OK
+/home/yangke/Program/Winux/wine-3.0.1/dlls/uxtheme/system.c:198:            lstrcpynW(szCurrentSize, pt->pszSelectedSize, sizeof(szCurrentSize)/sizeof(szCurrentSize[0]));
+[_3*]lstrcpynW,name,GetClassNameW,Definitely Error: when user provide long "class->name" and "count" which is big enough, while only provide "buffer" with limited size.
+/home/yangke/Program/Winux/wine-3.0.1/dlls/user32/class.c:1099:        lstrcpynW( buffer, class->name, count );
+[4?]lstrcpynW,sPathTarget,ISF_Desktop_fnParseDisplayName,PossibleErr(This->sPathTarget=NULL,Not triggered)
+/home/yangke/Program/Winux/wine-3.0.1/dlls/shell32/shfldr_desktop.c:241:                lstrcpynW(szPath, This->sPathTarget, MAX_PATH);
+[_5*]strcpyW,sPathTarget,ISF_Desktop_fnGetDisplayNameOf,
+#PossibleErr(This->sPathTarget=NULL),SHGetNameFromIDList(SHBindToParent(Hook Attack))->IShellFolder_GetDisplayNameOf->ISF_Desktop_fnGetDisplayNameOf
+Definite Error(This->sPathTarget=NULL) ShellItem_GetDisplayName->SHGetNameFromIDList->ISF_Desktop_fnGetDisplayNameOf(13)
+/home/yangke/Program/Winux/wine-3.0.1/dlls/shell32/shfldr_desktop.c:606:            strcpyW(pszPath, This->sPathTarget);
+########################################################################
+yangke@ubuntu:~/Program/Winux/wine-install/bin/test$ ../winedbg explorer
+WineDbg starting on pid 002d
+DbgBreakPoint () at /home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/include/winternl.h:2164
+0x7b46a2f2 DbgBreakPoint+0xe [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/include/winternl.h:2164] in kernel32: nop	
+2164	static inline void WINAPI DbgBreakPoint(void) { __asm__ __volatile__("int3"); }
+Wine-dbg>b ISF_Desktop_fnGetDisplayNameOf
+No symbols found for ISF_Desktop_fnGetDisplayNameOf
+Unable to add breakpoint, will check again when a new DLL is loaded
+Wine-dbg>c
+No symbols found for ISF_Desktop_fnGetDisplayNameOf
+No symbols found for ISF_Desktop_fnGetDisplayNameOf
+No symbols found for ISF_Desktop_fnGetDisplayNameOf
+No symbols found for ISF_Desktop_fnGetDisplayNameOf
+Breakpoint 1 at 0x7dfe893d ISF_Desktop_fnGetDisplayNameOf [/home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:587] in shell32<elf>
+002e:fixme:nstc:NSTC2_fnSetControlStyle2 mask & style (0x00000004) contains unsupported style(s): 0x00000004
+Stopped on breakpoint 1 at 0x7dfe893d ISF_Desktop_fnGetDisplayNameOf [/home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:587] in shell32
+ISF_Desktop_fnGetDisplayNameOf () at /home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:587
+587	{
+Wine-dbg>c 11
+002e:fixme:shell:IShellBrowser_fnSendControlMsg stub, 0x126730 (2, 1026, a003, 0, 0x33f250)
+002e:fixme:shell:IShellBrowser_fnSendControlMsg stub, 0x126730 (2, 1026, a004, 1, 0x33f250)
+002e:fixme:shell:IShellBrowser_fnSendControlMsg stub, 0x126730 (2, 1025, a003, 1, 0x33f250)
+002e:fixme:shell:IShellBrowser_fnSendControlMsg stub, 0x126730 (2, 1025, a004, 1, 0x33f250)
+Stopped on breakpoint 1 at 0x7dfe893d ISF_Desktop_fnGetDisplayNameOf [/home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:587] in shell32
+587	{
+Wine-dbg>b 606
+Breakpoint 2 at 0x7dfe8a7b ISF_Desktop_fnGetDisplayNameOf+0x13e [/home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:606] in shell32
+Wine-dbg>c
+Stopped on breakpoint 2 at 0x7dfe8a7b ISF_Desktop_fnGetDisplayNameOf+0x13e [/home/yangke/Program/Winux/wine-build/dlls/shell32/../../../wine-3.0.1/dlls/shell32/shfldr_desktop.c:606] in shell32
+606	            strcpyW(pszPath, This->sPathTarget);
+Wine-dbg>quit
+[-6*]memcpy,text,EDIT_EM_ReplaceSel,Definitely Error(EDITSTATE *es = (EDITSTATE *)GetWindowLongPtrW( hwnd, 0 );es->text=NULL;),EditWndProc_common->EDIT_WM_SetText->EDIT_EM_ReplaceSel
+/home/yangke/Program/Winux/wine-3.0.1/dlls/user32/edit.c:2614:		memcpy(buf, es->text + s, bufl * sizeof(WCHAR));
+[_7*]lstrcpynW,text,EDIT_WM_GetText,Definitely Error(EDITSTATE *es = (EDITSTATE *)GetWindowLongPtrW( hwnd, 0 );es->text=NULL;),EditWndProcW->EditWndProc_common->EDIT_WM_GetText
+/home/yangke/Program/Winux/wine-3.0.1/dlls/user32/edit.c:3352:	lstrcpynW(dst, es->text, count);
+
+del 13
+del 20
+del 15
+del 22
+del 25
+del 1
+del 3
+
+^:NULL Pointer Dereference
+-:Buffer Over Read
+_:Buffer Over Write
+*:Definite Error
+?:trigger the function(in which the sink stay), but didn't trigger the sink
+[(no bug)Number]: triggered, but no bug
+
+
+[^1*]
+[2]
+[_3*]
+[4?]
+[_5*]
+[-6*]
+[_7*]

@@ -1,0 +1,194 @@
+[(no bug)1]strlenW,name,lookup_assembly, the highest data structure created at dlls/ntdll/actctx.c:4607~4637, no WINAPI injection point
+Specificialy:
+Stopped on breakpoint 2 at 0x7bc2acf8 parse_assembly_identity_elem+0x54 [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:1337] in ntdll
+1337	            if (!(ai->name = xmlstrdupW(&attr_value))) return FALSE;
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc2acf8 parse_assembly_identity_elem+0x54(xmlbuf=0x33f804, actctx=0x112040, ai=0x11210c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:1337] in ntdll (0x0033f668)
+  1 0x7bc2e4b2 parse_assembly_elem+0x60e(xmlbuf=0x33f804, acl=0x33f93c, assembly=0x112108, expected_ai=(nil)) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2304] in ntdll (0x0033f728)
+  2 0x7bc2e896 parse_manifest_buffer+0x11f(acl=0x33f93c, assembly=0x112108, ai=(nil), xmlbuf=0x33f804) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2359] in ntdll (0x0033f788)
+  3 0x7bc2ed33 parse_manifest+0x357(acl=0x33f93c, ai=(nil), filename=0x0(nil), directory=0x0(nil), shared=0, buffer=0x32861df4, size=0x3c6) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2438] in ntdll (0x0033f818)
+  4 0x7bc2f1e0 get_manifest_in_module+0x2c2(acl=0x33f93c, ai=(nil), filename=0x0(nil), directory=0x0(nil), shared=0, hModule=0x316d0000, resname=*** invalid address 0x2 ***, lang=0) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2532] in ntdll (0x0033f8a8)
+  5 0x7bc34944 RtlCreateActivationContext+0x442(handle=0x111fb0, ptr=0x33f9bc) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4618] in ntdll (0x0033f968)
+  6 0x7bc58013 create_module_activation_context+0x8e(module=0x111f68) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:768] in ntdll (0x0033f9e8)
+  7 0x7bc5884b fixup_imports+0xf2(wm=0x111f68, load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6") [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:941] in ntdll (0x0033fa48)
+  8 0x7bc5b41d load_native_dll+0x25a(load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", name="C:\Program Files\Microsoft Office\Office14\wwlib.dll", file=0x4, flags=0, pwm=0x33fca0) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:1846] in ntdll (0x0033fb38)
+  9 0x7bc5ce0c load_dll+0x635(load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", libname="wwlib.dll", flags=0, pwm=0x33fca0) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:2322] in ntdll (0x0033fc78)
+  10 0x7bc5d089 LdrLoadDll+0x82(path_name="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", flags=<couldn't compute location>, libname=0x33fd74, hModule=0x33fd00) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:2355] in ntdll (0x0033fcc8)
+  11 0x7b4622d4 load_library+0x190(libname=0x33fd74, flags=0) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1212] in kernel32 (0x0033fd38)
+  12 0x7b462481 LoadLibraryExW+0x95(libnameW="wwlib.dll", hfile=0x0(nil), flags=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1272] in kernel32 (0x0033fd88)
+  13 0x7b4625bd LoadLibraryW+0x2b(libnameW=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1314] in kernel32 (0x0033fdb8)
+  14 0x3000168b in winword (+0x168a) (0x0033fe00)
+  15 0x300015ad in winword (+0x15ac) (0x0033fe10)
+  16 0x3000159a in winword (+0x1599) (0x0033fea0)
+  17 0x7b46cf48 call_process_entry+0xb() in kernel32 (0x0033feb8)
+  18 0x7b46d129 start_process+0x1d2(entry=0x300010ec, peb=0x7ffdf000) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/process.c:1139] in kernel32 (0x0033ffd8)
+  19 0x7b46cf56 start_process_wrapper+0x9() in kernel32 (0x0033ffec)
+
+"lookup_winsxs" has checked "if (!ai->arch || !ai->name || !ai->public_key) return STATUS_NO_SUCH_FILE;"
+
+"But, there may still exists integer overflow errors, look at the following code:"
+""
+    /* FIXME: add support for language specific lookup */
+
+    len = max(RtlGetFullPathName_U(acl->actctx->assemblies->manifest.info, 0, NULL, NULL) / sizeof(WCHAR),
+        strlenW(acl->actctx->appdir.info));//all comes from string, that's ok!
+
+    nameW.Buffer = NULL;
+    if (!(buffer = RtlAllocateHeap( GetProcessHeap(), 0,
+                                    (len + 2 * strlenW(ai->name) + 2) * sizeof(WCHAR) + sizeof(dotManifestW) )))
+									//Error bigger enought len may cause integer overflow,and small heap allocation, but look at the former code this won't happen.
+        return STATUS_NO_MEMORY;
+
+    if (!(directory = build_assembly_dir( ai )))
+    {
+        RtlFreeHeap( GetProcessHeap(), 0, buffer );
+        return STATUS_NO_MEMORY;
+    }
+
+    /* Lookup in <dir>\name.dll
+     *           <dir>\name.manifest
+     *           <dir>\name\name.dll
+     *           <dir>\name\name.manifest
+     *
+     * First 'appdir' is used as <dir>, if that failed
+     * it tries application manifest file path.
+     */
+    strcpyW( buffer, acl->actctx->appdir.info );
+    p = buffer + strlenW(buffer);
+    for (i = 0; i < 4; i++)
+    {
+        if (i == 2)
+        {
+            struct assembly *assembly = acl->actctx->assemblies;
+            if (!RtlGetFullPathName_U(assembly->manifest.info, len * sizeof(WCHAR), buffer, &p)) break;
+        }
+        else *p++ = '\\';
+
+        strcpyW( p, ai->name );
+        p += strlenW(p);
+
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:2857:                                    (len + 2 * strlenW(ai->name) + 2) * sizeof(WCHAR) + sizeof(dotManifestW) )))
+[(no bug)2]strcpyW,name,lookup_assembly
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:2885:        strcpyW( p, ai->name );
+[(no bug)3]strlenW,name,lookup_manifest_file
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:2690:                                    (strlenW(ai->arch) + strlenW(ai->name)
+Stopped on breakpoint 12 at 0x7bc2f89f lookup_manifest_file+0x57 [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2690] in ntdll
+2690	                                    (strlenW(ai->arch) + strlenW(ai->name)
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc2f89f lookup_manifest_file+0x57(dir=0x14, ai=0x33f7c8) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2690] in ntdll (0x0033f748)
+  1 0x7bc2ffa0 lookup_winsxs+0x1f4(acl=0x33f93c, ai=0x112328) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2799] in ntdll (0x0033f7f8)
+  2 0x7bc3020f lookup_assembly+0xb6(acl=0x33f93c, ai=0x112328) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2848] in ntdll (0x0033f888)
+  3 0x7bc305b6 parse_depend_manifests+0x46(acl=0x33f93c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:2929] in ntdll (0x0033f8b8)
+  4 0x7bc34a55 RtlCreateActivationContext+0x553(handle=0x111fb0, ptr=0x33f9bc) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4642] in ntdll (0x0033f968)
+  5 0x7bc58013 create_module_activation_context+0x8e(module=0x111f68) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:768] in ntdll (0x0033f9e8)
+  6 0x7bc5884b fixup_imports+0xf2(wm=0x111f68, load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6") [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:941] in ntdll (0x0033fa48)
+  7 0x7bc5b41d load_native_dll+0x25a(load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", name="C:\Program Files\Microsoft Office\Office14\wwlib.dll", file=0x4, flags=0, pwm=0x33fca0) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:1846] in ntdll (0x0033fb38)
+  8 0x7bc5ce0c load_dll+0x635(load_path="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", libname="wwlib.dll", flags=0, pwm=0x33fca0) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:2322] in ntdll (0x0033fc78)
+  9 0x7bc5d089 LdrLoadDll+0x82(path_name="C:\Program Files\Microsoft Office\Office14;C:\windows\system32;C:\windows\system;C:\windows;.;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\users\yangke\Local Settings\Application Data\Kingsoft\WPS Office\10.1.0.7520\office6", flags=<couldn't compute location>, libname=0x33fd74, hModule=0x33fd00) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/loader.c:2355] in ntdll (0x0033fcc8)
+  10 0x7b4622d4 load_library+0x190(libname=0x33fd74, flags=0) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1212] in kernel32 (0x0033fd38)
+  11 0x7b462481 LoadLibraryExW+0x95(libnameW="wwlib.dll", hfile=0x0(nil), flags=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1272] in kernel32 (0x0033fd88)
+  12 0x7b4625bd LoadLibraryW+0x2b(libnameW=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/module.c:1314] in kernel32 (0x0033fdb8)
+  13 0x3000168b in winword (+0x168a) (0x0033fe00)
+  14 0x300015ad in winword (+0x15ac) (0x0033fe10)
+  15 0x3000159a in winword (+0x1599) (0x0033fea0)
+  16 0x7b46cf48 call_process_entry+0xb() in kernel32 (0x0033feb8)
+  17 0x7b46d129 start_process+0x1d2(entry=0x300010ec, peb=0x7ffdf000) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/process.c:1139] in kernel32 (0x0033ffd8)
+  18 0x7b46cf56 start_process_wrapper+0x9() in kernel32 (0x0033ffec)
+
+[(no bug)4(dup in explorer)]lstrcpynW,pszSelectedColor,UXTHEME_LoadTheme,OK
+/home/yangke/Program/Winux/wine-3.0.1/dlls/uxtheme/system.c:197:            lstrcpynW(szCurrentColor, pt->pszSelectedColor, sizeof(szCurrentColor)/sizeof(szCurrentColor[0])); 
+[(no bug)5(dup in explorer)]lstrcpynW,pszSelectedSize,UXTHEME_LoadTheme,OK
+/home/yangke/Program/Winux/wine-3.0.1/dlls/uxtheme/system.c:198:            lstrcpynW(szCurrentSize, pt->pszSelectedSize, sizeof(szCurrentSize)/sizeof(szCurrentSize[0]));
+[^6*(dup in explorer)]strlenW,name,get_outline_text_metrics,Definitely Error:physdev->font->name can be set to NULL before calling API:GetTextMetricsW, which may cause NULL pointer dereference.
+/home/yangke/Program/Winux/wine-3.0.1/dlls/gdi32/freetype.c:7677:    lenfam = (strlenW(font->name) + 1) * sizeof(WCHAR);
+[_7*(dup in explorer)]lstrcpynW,name,GetClassNameW,Definitely Error: when user provide long "class->name" and "count" which is big enough, while only provide "buffer" with limited size.
+/home/yangke/Program/Winux/wine-3.0.1/dlls/user32/class.c:1099:        lstrcpynW( buffer, class->name, count );
+[^8*]strlenW,name,freetype_GetTextFace,Definitely Error; "physdev->font->name" can be NULL Pointer
+/home/yangke/Program/Winux/wine-3.0.1/dlls/gdi32/freetype.c:8318:    n = strlenW(physdev->font->name) + 1;
+[^_9*]lstrcpynW,name,freetype_GetTextFace,Definitely Error; "physdev->font->name" can be NULL Pointer; "physdev->font->name" and "count" can be long and big enough to trigger buffer overflow "WINAPI GetTextFaceW( HDC hdc, INT count, LPWSTR name )->freetype_GetTextFace"
+/home/yangke/Program/Winux/wine-3.0.1/dlls/gdi32/freetype.c:8321:        lstrcpynW(str, physdev->font->name, count);
+[^(_?)10*]strlenW,name,get_comserver_datalen
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3594:                *module_len += (strlenW(dll->name)+1)*sizeof(WCHAR);
+
+Stopped on breakpoint 62 at 0x7bc31ef8 get_comserver_datalen+0x12b [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3594] in ntdll
+3594	                *module_len += (strlenW(dll->name)+1)*sizeof(WCHAR);
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc31ef8 get_comserver_datalen+0x12b(entities=0x1126d0, dll=0x1126c8, count=0x33b284, len=0x33b280, module_len=0x33b288) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3594] in ntdll (0x0033b254)
+  1 0x7bc3277a build_comserver_section+0xba(actctx=0x110790, section=0x33b2f4) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3794] in ntdll (0x0033b2c8)
+  2 0x7bc329db find_comserver_redirection+0x65(actctx=0x110790, guid=0x33b5cc, data=0x33b4cc) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3846] in ntdll (0x0033b318)
+  3 0x7bc343af find_guid+0x5d(actctx=0x110790, section_kind=0x4, guid=0x33b5cc, flags=0x1, data=0x33b4cc) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4474] in ntdll (0x0033b348)
+->4 0x7bc35ce2 RtlFindActivationContextSectionGuid+0x1d9(flags=<couldn't compute location>, extguid=<couldn't compute location>, section_kind=<couldn't compute location>, guid=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5077] in ntdll (0x0033b3b8)
+
+[^(_?)11*]strlenW,name,add_comserver_record
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3625:            module_len = dll ? strlenW(dll->name)*sizeof(WCHAR) : strlenW(mscoreeW)*sizeof(WCHAR);
+Stopped on breakpoint 64 at 0x7bc31fe3 add_comserver_record+0xa8 [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3625] in ntdll
+3625	            module_len = dll ? strlenW(dll->name)*sizeof(WCHAR) : strlenW(mscoreeW)*sizeof(WCHAR);
+TIPS: "->" shows the WINAPI inject point
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc31fe3 add_comserver_record+0xa8(section=0x1d8068, entities=0x1126d0, dll=0x1126c8, index=0x51ef9d4, data_offset=0x51ef9d0, module_offset=0x51ef9cc, seed=0x51ef9d8, rosterindex=0x1) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3625] in ntdll (0x051ef988)
+  1 0x7bc32910 build_comserver_section+0x250(actctx=0x110790, section=0x51efa34) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3821] in ntdll (0x051efa08)
+  2 0x7bc329db find_comserver_redirection+0x65(actctx=0x110790, guid=0x51efd0c, data=0x51efc0c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3846] in ntdll (0x051efa58)
+  3 0x7bc343af find_guid+0x5d(actctx=0x110790, section_kind=0x4, guid=0x51efd0c, flags=0x1, data=0x51efc0c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4474] in ntdll (0x051efa88)
+->4 0x7bc35ce2 RtlFindActivationContextSectionGuid+0x1d9(flags=<couldn't compute location>, extguid=<couldn't compute location>, section_kind=<couldn't compute location>, guid=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5077] in ntdll (0x051efaf8)
+  5 0x7b429d7f FindActCtxSectionGuid+0x32(dwFlags=<couldn't compute location>, lpExtGuid=<couldn't compute location>, ulId=<couldn't compute location>, lpSearchGuid=<couldn't compute location>, pInfo=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/kernel32/../../../wine-3.0.1/dlls/kernel32/actctx.c:284] in kernel32 (0x051efb48)
+  6 0x7e935ba7 CoGetClassObject+0x2dc(rclsid=0x51efd0c, dwClsContext=<couldn't compute location>, pServerInfo=(nil), iid=0x7ea44b30, ppv=0x51efcb8) [/home/yangke/Program/Winux/wine-build/dlls/ole32/../../../wine-3.0.1/dlls/ole32/compobj.c:3033] in ole32 (0x051efc68)
+  7 0x7e93678c CoCreateInstanceEx+0x2f6(rclsid=0x3932ce28, pUnkOuter=(nil), dwClsContext=<couldn't compute location>, pServerInfo=(nil), cmq=<couldn't compute location>, pResults=0x51efd90) [/home/yangke/Program/Winux/wine-build/dlls/ole32/../../../wine-3.0.1/dlls/ole32/compobj.c:3331] in ole32 (0x051efd38)
+  8 0x7e9362e7 CoCreateInstance+0xef(rclsid=0x3932ce28, pUnkOuter=(nil), dwClsContext=<couldn't compute location>, iid=0x3932ce38, ppv=0x51efe74) [/home/yangke/Program/Winux/wine-build/dlls/ole32/../../../wine-3.0.1/dlls/ole32/compobj.c:3227] in ole32 (0x051efdb8)
+  9 0x39024a93 in mso (+0x24a92) (0x051efe4c)
+  10 0x3916171f in mso (+0x16171e) (0x051efe78)
+  11 0x39035c7b in mso (+0x35c7a) (0x051efe94)
+  12 0x39024d6f in mso (+0x24d6e) (0x051efecc)
+  13 0x7bc90aa8 call_thread_func_wrapper+0xb() in ntdll (0x051efedc)
+  14 0x7bc90b7f call_thread_func+0xd4(entry=0x39024c8f, arg=0xad2000) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/signal_i386.c:2961] in ntdll (0x051effdc)
+  15 0x7bc90a9a call_thread_entry+0x9() in ntdll (0x051effec)
+
+[^(_?)12*]memcpy,name,add_comserver_record
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3738:                memcpy(ptrW, dll->name, data->name_len);
+
+Stopped on breakpoint 65 at 0x7bc32539 add_comserver_record+0x5fe [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3738] in ntdll
+3738	                memcpy(ptrW, dll->name, data->name_len);
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc32539 add_comserver_record+0x5fe(section=0x1d8068, entities=0x1126d0, dll=0x1126c8, index=0x51ef9d4, data_offset=0x51ef9d0, module_offset=0x51ef9cc, seed=0x51ef9d8, rosterindex=0x1) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3738] in ntdll (0x051ef988)
+  1 0x7bc32910 build_comserver_section+0x250(actctx=0x110790, section=0x51efa34) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3821] in ntdll (0x051efa08)
+  2 0x7bc329db find_comserver_redirection+0x65(actctx=0x110790, guid=0x51efd0c, data=0x51efc0c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3846] in ntdll (0x051efa58)
+  3 0x7bc343af find_guid+0x5d(actctx=0x110790, section_kind=0x4, guid=0x51efd0c, flags=0x1, data=0x51efc0c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4474] in ntdll (0x051efa88)
+->4 0x7bc35ce2 RtlFindActivationContextSectionGuid+0x1d9(flags=<couldn't compute location>, extguid=<couldn't compute location>, section_kind=<couldn't compute location>, guid=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5077] in ntdll (0x051efaf8)
+  ...//the following bt is same as the upper one
+[^(_?)13*]strlenW,name,build_dllredirect_section
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3000:            total_len += aligned_string_len((strlenW(dll->name)+1)*sizeof(WCHAR));
+Stopped on breakpoint 2 at 0x7bc3087f build_dllredirect_section+0x82 [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3000] in ntdll
+3000	            total_len += aligned_string_len((strlenW(dll->name)+1)*sizeof(WCHAR));
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc3087f build_dllredirect_section+0x82(actctx=0x112040, section=0x33f524) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3000] in ntdll (0x0033f4f8)
+  1 0x7bc30d33 find_dll_redirection+0x5e(actctx=0x112040, name=0x33f694, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3128] in ntdll (0x0033f548)
+  2 0x7bc34233 find_string+0x47(actctx=0x112040, section_kind=0x2, section_name=0x33f694, flags=0x1, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4437] in ntdll (0x0033f588)
+->3 0x7bc35acb RtlFindActivationContextSectionString+0x1fc(flags=<couldn't compute location>, guid=<couldn't compute location>, section_kind=<couldn't compute location>, section_name=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5032] in ntdll (0x0033f608)
+
+[^(_?)14*]strlenW,name,build_dllredirect_section
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3030:            str.Length = strlenW(dll->name)*sizeof(WCHAR);
+Stopped on breakpoint 4 at 0x7bc309b3 build_dllredirect_section+0x1b6 [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3030] in ntdll
+3030	            str.Length = strlenW(dll->name)*sizeof(WCHAR);
+=>0 0x7bc309b3 build_dllredirect_section+0x1b6(actctx=0x112040, section=0x33f524) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3030] in ntdll (0x0033f4f8)
+  1 0x7bc30d33 find_dll_redirection+0x5e(actctx=0x112040, name=0x33f694, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3128] in ntdll (0x0033f548)
+  2 0x7bc34233 find_string+0x47(actctx=0x112040, section_kind=0x2, section_name=0x33f694, flags=0x1, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4437] in ntdll (0x0033f588)
+->3 0x7bc35acb RtlFindActivationContextSectionString+0x1fc(flags=<couldn't compute location>, guid=<couldn't compute location>, section_kind=<couldn't compute location>, section_name=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5032] in ntdll (0x0033f608)
+[^(_?)15*]memcpy,name,build_dllredirect_section
+/home/yangke/Program/Winux/wine-3.0.1/dlls/ntdll/actctx.c:3049:            memcpy(ptrW, dll->name, index->name_len);
+Stopped on breakpoint 3 at 0x7bc30a79 build_dllredirect_section+0x27c [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3049] in ntdll
+3049	            memcpy(ptrW, dll->name, index->name_len);
+Wine-dbg>bt
+Backtrace:
+=>0 0x7bc30a79 build_dllredirect_section+0x27c(actctx=0x112040, section=0x33f524) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3049] in ntdll (0x0033f4f8)
+  1 0x7bc30d33 find_dll_redirection+0x5e(actctx=0x112040, name=0x33f694, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:3128] in ntdll (0x0033f548)
+  2 0x7bc34233 find_string+0x47(actctx=0x112040, section_kind=0x2, section_name=0x33f694, flags=0x1, data=0x33f69c) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:4437] in ntdll (0x0033f588)
+->3 0x7bc35acb RtlFindActivationContextSectionString+0x1fc(flags=<couldn't compute location>, guid=<couldn't compute location>, section_kind=<couldn't compute location>, section_name=<couldn't compute location>, ptr=<couldn't compute location>) [/home/yangke/Program/Winux/wine-build/dlls/ntdll/../../../wine-3.0.1/dlls/ntdll/actctx.c:5032] in ntdll (0x0033f608)
+
+[16?]lstrcpynW,sPathTarget,ISF_Desktop_fnParseDisplayName,PossibleErr(This->sPathTarget=NULL,Not triggered)
+/home/yangke/Program/Winux/wine-3.0.1/dlls/shell32/shfldr_desktop.c:241:                lstrcpynW(szPath, This->sPathTarget, MAX_PATH);
+
